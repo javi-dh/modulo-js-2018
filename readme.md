@@ -2,14 +2,14 @@
 
 Soluciones de las ejercitaciones de las 8 clases del módulo de Javascript. Comentadas en su totalidad para mejor compresión.
 
-- [Clase 01](clase01/)
-- [Clase 02](clase02/)
-- [Clase 03](clase03/)
-- [Clase 04](clase04/)
-- [Clase 05](clase05/)
-- [Clase 06](clase06/)
-- [Clase 07](clase07/)
-- [Clase 08](clase08/)
+- [Clase 01](clase-01/)
+- [Clase 02](clase-02/)
+- [Clase 03](clase-03/)
+- [Clase 04](clase-04/)
+- [Clase 05](clase-05/)
+- [Clase 06](clase-06/)
+- [Clase 07](clase-07/)
+- [Clase 08](clase-08/)
 
 ---
 ### Enjoy it
