@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>ECMA Script 6</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8" id="toDoListContainer">
+					<h2></h2>
+					<ul class="list-group">
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<script>
+		const doList = document.querySelector('.list-group');
+		const title = document.querySelector('h2');
+
+		if (window.localStorage.getItem('doList')) {
+			doList.innerHTML = window.localStorage.getItem('doList');
+			title.innerText = `Tienes un total de ${doList.children.length} tareas:`;
+		} else {
+			title.innerHTML = 'Excelente, no tienes tareas pendientes';
+		}
+		</script>
+	</body>
+</html>

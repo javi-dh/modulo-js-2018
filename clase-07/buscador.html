@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>JSON - AJAX - FETCH</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+	</head>
+	<body>
+
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-8">
+					<form method="post" enctype="application/x-www-form-urlencoded">
+						<div class="form-group">
+							<label>Title:</label>
+							<input type="text" name="title" class="form-control">
+							<ul class="list-group"></ul>
+						</div>
+						<button type="submit" class="btn btn-success">ENVIAR</button>
+					</form>
+				</div>
+			</div>
+
+		<script>
+			var txtSearch = document.querySelector('[name=title]');
+			var list = document.querySelector('.list-group');
+
+			txtSearch.addEventListener('keyup', function () {
+				if (txtSearch.value.length >= 2) {
+					var ajaxCall = new XMLHttpRequest();
+
+					ajaxCall.onreadystatechange = function () {
+						if (ajaxCall.readyState === 4 && ajaxCall.status === 200) {
+							var resultado = JSON.parse(ajaxCall.response);
+							console.log(resultado);
+							resultado.forEach(function (ele) {
+								list.innerHTML += '<li class="list-group-item list-group-item-info">' + ele.title + '</li>';
+							});
+						}
+					};
+
+					ajaxCall.open('POST', 'http://localhost:2020/search.php', true);
+
+					ajaxCall.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+					var data = `title=${txtSearch.value}`;
+
+					ajaxCall.send(data);
+				};
+			});
+		</script>
+	</body>
+</html>

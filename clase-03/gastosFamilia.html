@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Gastos familiares</title>
+	</head>
+	<body>
+		<script>
+			var iniciar = window.confirm('¿Deseas iniciar?'); // Solicitamos confirmación del usuario con un confirm()
+
+			if (!iniciar) { // Si el usuario NO confirmó lo redirigimos a la web de Netflix
+				window.location = 'https://netflix.com';
+			}
+
+			// Si el usuario confirmo que SI quiere iniciar
+			do {
+				// Guardamos en una variable la cantidad de integrantes que el usuario desea
+				var cantidadIntegrantes = Number(window.prompt('Cantidad de integrantes'));
+
+				// Si el valor ingresado NO es un número (isNaN()) 0 es menor a 3 arrojamos una alerta
+				if (isNaN(cantidadIntegrantes) || cantidadIntegrantes < 3) {
+					window.alert('Valor debe ser número y mayor o igual a 3');
+				}
+			} while (isNaN(cantidadIntegrantes) || cantidadIntegrantes < 3); // Pediremos la cantidad de integrantes mientras la misma NO sea un número o si siendo un número es menor a 3
+
+			var integrantes = []; // array vacío que guardará a cada integrante en formato de objeto
+
+			// Iteramos tantas veces como integrantes nos hayan pasado
+			for (var i = 1; i <= cantidadIntegrantes; i++) {
+				do {
+					// Pedimos el nombre de cada integrante
+					var nombrePersona = window.prompt('Nombre persona: ' + i);
+
+					// Si el campo está vació alertamos
+					if (nombrePersona === '') {
+						window.alert('El nombre no puede ser estar vacío');
+					}
+				} while (nombrePersona === ''); // Pediremos el nombre del integrante mientras que el campo esté vacío
+
+				do {
+					// Pedimos la cifra de cada integrante
+					var gastosPersona = window.prompt('Gastos persona: ' + i);
+
+					// Si el campo NO está vació parseamos el mismo a un número
+					if (gastosPersona !== '') {
+						gastosPersona = Number(gastosPersona);
+					}
+
+					// Si el campo está vació o NO es un número alertamos alertamos
+					if (gastosPersona === '' || isNaN(gastosPersona)) {
+						window.alert('Gastos no puede estar vacío y debe ser un número');
+					}
+				} while (gastosPersona === '' || isNaN(gastosPersona)); // Pediremos el gasto del integrante mientras que el campo esté vacío o mientras NO sea un número
+
+				// Pasado lo anterior insertamos un objeto con propiedad nombre y propiedad gastos dentro del array integrantes
+				integrantes.push({nombre: nombrePersona, gastos: gastosPersona});
+			}
+
+			// Arrancando el integrante que gastó más fue el 1ero
+			var gastoAlto = integrantes[0].gastos;
+
+			// Arrancando el integrante que gastó menos fue el 1ero
+			var gastoBajo = integrantes[0].gastos;
+
+			// Arrancando el total de gastos de la familia es cero
+			var totalGastos = 0;
+
+			// Arrancando el promedio de gastos de la famila es cero
+			var promedioGastos = 0;
+
+			// Iteramos el array de integrantes
+			for (var x = 0; x < integrantes.length; x++) {
+				// Al total de gastos le sumamos en cada iteración, el total de gastos actual más el gasto de cada integrante
+				totalGastos = totalGastos + integrantes[x].gastos;
+
+				// Al promedio de gastos le damos el total de gastos actual y lo dividimos entre la cantidad total de integrantes
+				promedioGastos = totalGastos / integrantes.length;
+
+				// El gasto más alto lo vamos eligiendo con la función Math.max() que toma el gastoAlto actual y el gasto del integrante actual de la iteración y de esos dos datos se elige el más alto
+				gastoAlto = Math.max(gastoAlto, integrantes[x].gastos);
+
+				// La persona que más gastó la vamos a buscar dentro del array con el método find()
+				// .find() recorre uno a uno los elementos del array dado, en este caso integrantes
+				var personaMasGasto = integrantes.find(function (element) {
+					// Si el valor de la propiedad gastos del elemento que estamos iterando es igual al gasto más alto retornamos a ese elemento, que es el objeto completo
+					if (element.gastos === gastoAlto) {
+						return element;
+					}
+				});
+
+				// La persona que menos gastó la vamos a buscar dentro del array con el método find()
+				// .find() recorre uno a uno los elementos del array dado, en este caso integrantes
+				gastoBajo = Math.min(gastoBajo, integrantes[x].gastos);
+				var personaMenosGasto = integrantes.find(function (element) {
+					// Si el valor de la propiedad gastos del elemento que estamos iterando es igual al gasto más bajo retornamos a ese elemento, que es el objeto completo
+					if (element.gastos === gastoBajo) {
+						return element;
+					}
+				});
+			}
+
+			// Finalmente hacemos los console.log() requeridos
+			console.log(integrantes);
+			console.log(`Quién más gastó: ${personaMasGasto.nombre} - $${gastoAlto}`);
+			console.log(`Quién menos gastó: ${personaMenosGasto.nombre} - $${gastoBajo}`);
+			console.log(`Total de gastos de la familia: ${totalGastos}`);
+			console.log(`Promedio de gastos de la familia: ${promedioGastos}`);
+		</script>
+	</body>
+</html>

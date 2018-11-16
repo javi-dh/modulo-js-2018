@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+	<head>
+		<meta charset="utf-8">
+		<title>Date</title>
+	</head>
+	<body>
+		<h2></h2>
+		<script>
+			var myOwnDate = new Date();
+
+			var actualDayNumber = myOwnDate.getDate();
+			var actualMonth = myOwnDate.getMonth();
+			var actualDayName = myOwnDate.getDay();
+			var actualFullYear = myOwnDate.getFullYear();
+
+			var daysArray = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+			var monthsArray = ['Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.', 'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov', 'Dic'];
+
+			document.querySelector('h2').innerText = `${daysArray[actualDayName]} ${actualDayNumber} de ${monthsArray[actualMonth]} de ${actualFullYear}.`;
+
+			var otraFecha = new Date(2018, 11, 25);
+
+			console.log('Dias hasta navidad:', `${Math.ceil(((otraFecha.getTime() - myOwnDate.getTime()) / (1000 * 60 * 60 * 24)))}`);
+
+
+		</script>
+	</body>
+</html>
