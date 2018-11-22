@@ -7,21 +7,47 @@
 	<body>
 		<h2></h2>
 		<script>
+			// Instanciamos el objeto Date(), para poder tener disponibles sus métodos
 			var myOwnDate = new Date();
 
+			// Obtenemos con el método getDate() el número de día en el calendario - del 1 al 31 según el mes
 			var actualDayNumber = myOwnDate.getDate();
+
+			// Obtenemos con el método getMonth() el número del mes - del 0 (Enero) al 11 (Diciembre)
 			var actualMonth = myOwnDate.getMonth();
+
+			// Obtenemos con el método getDay() el día de la semana - del 0 (Domingo) al 6 (Sábado)
 			var actualDayName = myOwnDate.getDay();
+
+			// Obtenemos con el método getFullYear() el año completo actual
 			var actualFullYear = myOwnDate.getFullYear();
 
+			// Array de días de la semana
 			var daysArray = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+
+			// Array de meses del año
 			var monthsArray = ['Ene.', 'Feb.', 'Mar.', 'Abr.', 'May.', 'Jun.', 'Jul.', 'Ago.', 'Sep.', 'Oct.', 'Nov', 'Dic'];
 
+			/*
+			* Al <h2> dentro del documento le asignamos el texto
+			* daysArray[actualDayName] - del array de días obtenemos el valor según el número del día de la semana obtenido
+			* monthsArray[actualMonth] - del array de meses obtenemos el valor según el número del mes obtenido
+			*/
 			document.querySelector('h2').innerText = `${daysArray[actualDayName]} ${actualDayNumber} de ${monthsArray[actualMonth]} de ${actualFullYear}.`;
 
-			var otraFecha = new Date(2018, 11, 25);
+			/*
+			* Al instanciar un objeto Date() es posible pasarle cómo parámetro el año, mes y día que deseemos
+			* Si no le pasamos parámetros la fecha obtenida será la del día, mes y año de hoy
+			*/
+			var nextChristmas = new Date(2018, 11, 25);
 
-			console.log('Dias hasta navidad:', `${Math.ceil(((otraFecha.getTime() - myOwnDate.getTime()) / (1000 * 60 * 60 * 24)))}`);
+			/*
+			* El método getTime() retorna la cantidad de milisegundos que han pasado desde el 1ero de Enero de 1970 (Fecha UNIX)
+			* hasta la fecha actual o la fecha seteada.
+			* Para pasar una X cantidad de milisegundos a 1 día necesitamos:
+			* 1000 * 60 * 60 * 24 - 1000ms hacen un segundo. 60seg hacen un minuto, 60min hace una hora, 24hs hacen un día
+			*/
+			console.log('Dias hasta navidad:', `${Math.ceil(((nextChristmas.getTime() - myOwnDate.getTime()) / (1000 * 60 * 60 * 24)))}`);
 
 
 		</script>
